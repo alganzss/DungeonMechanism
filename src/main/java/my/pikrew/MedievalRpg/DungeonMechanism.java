@@ -119,10 +119,10 @@ public class DungeonMechanism extends JavaPlugin implements Listener {
 
             sender.sendMessage(ChatColor.YELLOW + "⟳ Merefresh DungeonMechanism...");
 
-            // Simpan ulang dan muat ulang semua konfigurasi dan data
-            this.reloadConfig(); // Jika pakai config.yml
-            this.loadSettings(); // Fungsi custom kamu untuk load file atau setting
-            this.loadRegionSettings(); // Fungsi load folder-region.yml
+
+            this.reloadConfig();
+            this.loadSettings();
+            this.loadRegionSettings();
 
             sender.sendMessage(ChatColor.GREEN + "✓ Plugin DungeonMechanism berhasil direload!");
             return true;
