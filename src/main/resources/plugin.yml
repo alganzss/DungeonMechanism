@@ -1,0 +1,19 @@
+name: DungeonMechanism
+version: '1.0-SNAPSHOT'
+main: my.pikrew.MedievalRpg.DungeonMechanism
+api-version: '1.20'
+commands:
+  dungeonreload:
+    description: Reload DungeonMechanism config and data
+    usage: /<command>
+    permission: dungeon.reload
+  createlaser:
+    description: Membuat laser antar dua titik menggunakan WorldEdit
+    usage: /createlaser
+permissions:
+  dungeon.reload:
+    description: Allows reloading the plugin
+    default: op
+  createrlaser:
+    description: permission
+    default: op

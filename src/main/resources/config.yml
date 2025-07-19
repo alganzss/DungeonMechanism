@@ -1,0 +1,19 @@
+#Author Pikrew
+#---------------------------------------------------------------------------------------------------
+#Door Room Mechanism
+region: dungeon               # Nama region WorldGuard
+radius: 1                     # Radius horizontal sekitar block yang hilang (1 = total 3 blok)
+trigger-block: CHISELED_STONE_BRICKS  # Jenis blok pemicu saat diklik kanan
+restore-delay: 6             # Waktu pengembalian dalam detik
+#---------------------------------------------------------------------------------------------------
+#HealArea Mechanism
+heal-block: LAPIS_BLOCK
+heal-amount: 1.0
+#---------------------------------------------------------------------------------------------------
+#Laser Mechanism
+particle:
+  type: SMOKE
+  color:
+    red: 255
+    green: 0
+    blue: 0
