@@ -119,7 +119,6 @@ public class DungeonMechanism extends JavaPlugin implements Listener {
 
             sender.sendMessage(ChatColor.YELLOW + "⟳ Merefresh DungeonMechanism...");
 
-
             this.reloadConfig();
             this.loadSettings();
             this.loadRegionSettings();
