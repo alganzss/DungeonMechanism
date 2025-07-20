@@ -7,6 +7,7 @@ import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
+import my.pikrew.mmoitemsdungeon.RegionEntryListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -48,6 +49,8 @@ public class DungeonMechanism extends JavaPlugin implements Listener {
         getLogger().info("Door Room Dungeon Mechanism enabled");
         getLogger().info("Heal Arean Dungeon Mechanism Enabled");
         getLogger().info("Trap dungeon Mechanism Enabled");
+        getServer().getPluginManager().registerEvents(new RegionEntryListener(getLogger()), this);
+
 
     }
 

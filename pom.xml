@@ -76,6 +76,11 @@
             <name>Skript Repository</name>
             <url>https://repo.skriptlang.org/releases</url>
         </repository>
+        <repository>
+            <id>nexus</id>
+            <name>Lumine Releases</name>
+            <url>https://mvn.lumine.io/repository/maven-public/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -101,7 +106,7 @@
         <dependency>
             <groupId>net.Indyuce</groupId>
             <artifactId>MMOItems-API</artifactId>
-            <version>6.9.5-SNAPSHOT</version>
+            <version>6.10-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -115,6 +120,18 @@
             <groupId>com.github.SkriptLang</groupId>
             <artifactId>Skript</artifactId>
             <version>2.11.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.raidstone</groupId>
+            <artifactId>WorldGuardEvents</artifactId>
+            <version>1.18.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.lumine</groupId>
+            <artifactId>Mythic-Dist</artifactId>
+            <version>5.6.1</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
