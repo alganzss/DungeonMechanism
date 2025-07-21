@@ -1,15 +1,15 @@
 package my.pikrew.mmoitemsdungeon;
 
-import io.lumine.mythic.lib.api.item.NBTItem;
 import net.raidstone.wgevents.events.RegionEnteredEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -29,22 +29,29 @@ public class RegionEntryListener implements Listener {
 
         log.info("[DEBUG] Player " + player.getName() + " masuk region dg1. Memeriksa armor...");
 
-        boolean hasRequiredTag = Arrays.stream(player.getInventory().getArmorContents())
+        boolean hasRequiredLore = Arrays.stream(player.getInventory().getArmorContents())
                 .filter(Objects::nonNull)
-                .map(NBTItem::get)
-                .filter(nbt -> {
-                    boolean hasTag = nbt.hasTag("pikrew");
-                    if (hasTag) {
-                        log.info("[DEBUG] Armor memiliki tag pikrew = " + nbt.getString("pikrew"));
-                    } else {
-                        log.info("[DEBUG] Armor TIDAK memiliki tag pikrew.");
+                .map(item -> {
+                    ItemMeta meta = item.getItemMeta();
+                    if (meta != null && meta.hasLore()) {
+                        List<String> lore = meta.getLore();
+                        if (lore != null) {
+                            for (String line : lore) {
+                                log.info("[DEBUG] Lore: " + ChatColor.stripColor(line));
+                                if (ChatColor.stripColor(line).toLowerCase().contains("pikrew")) {
+                                    return true;
+                                }
+                            }
+                        }
                     }
-                    return hasTag;
+                    log.info("[DEBUG] Armor TIDAK memiliki lore yang mengandung 'pikrew'");
+                    return false;
                 })
-                .anyMatch(nbt -> "1".equals(nbt.getString("pikrew")));
+                .anyMatch(found -> found);
 
 
-        if (!hasRequiredTag) {
+
+        if (!hasRequiredLore) {
             // Dorong player ke belakang
             Vector push = player.getLocation().getDirection().multiply(-1.5).setY(0.5);
             player.setVelocity(push);

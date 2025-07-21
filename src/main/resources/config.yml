@@ -10,10 +10,9 @@ restore-delay: 6             # Waktu pengembalian dalam detik
 heal-block: LAPIS_BLOCK
 heal-amount: 1.0
 #---------------------------------------------------------------------------------------------------
-#Laser Mechanism
-particle:
-  type: SMOKE
-  color:
-    red: 255
-    green: 0
-    blue: 0
+#Trap mechanism
+regiond: dg1
+block: STONECUTTER
+trap_duration: 5
+particle: FLAME
+

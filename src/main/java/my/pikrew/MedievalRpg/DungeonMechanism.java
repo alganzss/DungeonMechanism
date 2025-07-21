@@ -48,8 +48,8 @@ public class DungeonMechanism extends JavaPlugin implements Listener {
         getLogger().info("DungeonMechanism enabled");
         getLogger().info("Door Room Dungeon Mechanism enabled");
         getLogger().info("Heal Arean Dungeon Mechanism Enabled");
-        getLogger().info("Trap dungeon Mechanism Enabled");
         getServer().getPluginManager().registerEvents(new RegionEntryListener(getLogger()), this);
+        getServer().getPluginManager().registerEvents(new Regiontrap(this), this);
 
 
     }
