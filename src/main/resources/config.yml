@@ -25,3 +25,293 @@ dungeon_spawn:
   x: 183
   y: 4
   z: 16
+
+# HerbalCraft Configuration File
+# Plugin untuk mengumpulkan herbal dan membuat ramuan kuat
+
+# General Settings
+general:
+  # Peluang drop ketika right-click grass (0.0 - 1.0)
+  drop-chance: 0.3
+
+  # Waktu regenerasi block dalam detik (default: 300 = 5 menit)
+  block-regeneration-time: 300
+
+  # Apakah menampilkan particle effect saat mendapat herbal
+  show-particles: true
+
+  # Cooldown dalam detik untuk mencegah spam clicking
+  cooldown: 2
+
+# Daftar nama world dungeon yang bisa drop herbal
+# Tambahkan nama world dungeon Anda di sini
+dungeon-worlds:
+  - "dungeon_world"
+  - "mining_world"
+  - "adventure_world"
+
+# Peluang drop untuk setiap tier (dalam persen)
+# Total harus 100%
+tier-chances:
+  common: 50.0      # 50% chance
+  uncommon: 25.0    # 25% chance
+  rare: 15.0        # 15% chance
+  epic: 8.0         # 8% chance
+  legendary: 2.0    # 2% chance
+
+# Konfigurasi item herbal
+herbal-items:
+  common:
+    name: "&f&lHerbal Grass"
+    material: "WHEAT_SEEDS"
+    lore:
+      - "&7Tier: &fCommon"
+      - "&7Rumput herbal biasa yang tumbuh"
+      - "&7di area dungeon"
+      - ""
+      - "&eCan be crafted into healing potion"
+
+  uncommon:
+    name: "&a&lWild Mint"
+    material: "GREEN_DYE"
+    lore:
+      - "&7Tier: &aUncommon"
+      - "&7Mint liar dengan aroma menyegarkan"
+      - "&7yang memberikan kekuatan ekstra"
+      - ""
+      - "&eCan be crafted into strength potion"
+
+  rare:
+    name: "&9&lMystic Flower"
+    material: "BLUE_ORCHID"
+    lore:
+      - "&7Tier: &9Rare"
+      - "&7Bunga mistis yang memancarkan"
+      - "&7energi magis untuk kecepatan"
+      - ""
+      - "&eCan be crafted into speed potion"
+
+  epic:
+    name: "&5&lCrystal Herb"
+    material: "AMETHYST_SHARD"
+    lore:
+      - "&7Tier: &5Epic"
+      - "&7Herbal kristal yang mengandung"
+      - "&7kekuatan regenerasi luar biasa"
+      - ""
+      - "&eCan be crafted into regeneration potion"
+
+  legendary:
+    name: "&6&lDivine Essence"
+    material: "NETHER_STAR"
+    lore:
+      - "&7Tier: &6Legendary"
+      - "&7Esensi ilahi yang memberikan"
+      - "&7kekuatan para dewa"
+      - ""
+      - "&eCan be crafted into divine power potion"
+
+# Konfigurasi potion effects
+potion-effects:
+  common:
+    duration: 0        # Instant heal
+    effects:
+      - "INSTANT_HEALTH:2"
+
+  uncommon:
+    duration: 300      # 5 minutes
+    effects:
+      - "INCREASE_DAMAGE:2"
+
+  rare:
+    duration: 600      # 10 minutes
+    effects:
+      - "SPEED:3"
+      - "JUMP:2"
+
+  epic:
+    duration: 900      # 15 minutes
+    effects:
+      - "REGENERATION:3"
+      - "DAMAGE_RESISTANCE:2"
+
+  legendary:
+    duration: 1200     # 20 minutes
+    effects:
+      - "REGENERATION:4"
+      - "INCREASE_DAMAGE:3"
+      - "SPEED:3"
+      - "DAMAGE_RESISTANCE:3"
+      - "ABSORPTION:5"
+      - "FIRE_RESISTANCE:1"
+
+# Konfigurasi crafting recipes
+# Pattern menggunakan H=Herbal, W=Water/Lava, G=Glass/Special
+crafting-recipes:
+  common:
+    pattern:
+      - " H "
+      - " W "
+      - " G "
+    ingredients:
+      H: "herbal_item"
+      W: "WATER_BUCKET"
+      G: "GLASS_BOTTLE"
+
+  uncommon:
+    pattern:
+      - " H "
+      - "HWH"
+      - " G "
+    ingredients:
+      H: "herbal_item"
+      W: "WATER_BUCKET"
+      G: "GLASS_BOTTLE"
+
+  rare:
+    pattern:
+      - "HHH"
+      - "HWH"
+      - " G "
+    ingredients:
+      H: "herbal_item"
+      W: "WATER_BUCKET"
+      G: "GLASS_BOTTLE"
+
+  epic:
+    pattern:
+      - "HHH"
+      - "HWH"
+      - "HGH"
+    ingredients:
+      H: "herbal_item"
+      W: "WATER_BUCKET"
+      G: "GLASS_BOTTLE"
+
+  legendary:
+    pattern:
+      - "HHH"
+      - "HWH"
+      - "HGH"
+    ingredients:
+      H: "herbal_item"
+      W: "LAVA_BUCKET"      # Special ingredient
+      G: "DRAGON_BREATH"    # Special ingredient
+
+# Pesan yang ditampilkan kepada player
+messages:
+  herbal-found: "&a&l[HerbalCraft] &7You found {tier} &7herbal: {item}!"
+  potion-consumed: "&a&l[HerbalCraft] &7You consumed {tier} &7potion: {potion}!"
+  no-permission: "&c&l[HerbalCraft] &7You don't have permission to do that!"
+  cooldown-active: "&c&l[HerbalCraft] &7Please wait {time} seconds before harvesting again!"
+  invalid-world: "&c&l[HerbalCraft] &7You can only harvest herbs in dungeon worlds!"
+  block-regenerating: "&c&l[HerbalCraft] &7This block is regenerating! Wait {time} more seconds."
+
+  # Broadcast message untuk legendary drops
+  legendary-broadcast: "&6&l[LEGENDARY DROP!] &e{player} &7found a {item} &7in the dungeon! &6✨"
+
+  # Command messages
+  reload-success: "&a&l[HerbalCraft] &7Configuration reloaded successfully!"
+  player-not-found: "&c&l[HerbalCraft] &7Player not found!"
+  invalid-tier: "&c&l[HerbalCraft] &7Invalid tier! Available: common, uncommon, rare, epic, legendary"
+  invalid-type: "&c&l[HerbalCraft] &7Invalid type! Available: herbal, potion"
+  item-given: "&a&l[HerbalCraft] &7Given {amount}x {tier} {type} to {player}!"
+  item-received: "&a&l[HerbalCraft] &7You received {amount}x {tier} {type}!"
+
+# Sound effects
+sounds:
+  herbal-found: "BLOCK_GRASS_BREAK"
+  potion-consumed: "ENTITY_PLAYER_BURP"
+  craft-success: "BLOCK_BREWING_STAND_BREW"
+  block-regenerate: "BLOCK_GRASS_PLACE"
+  legendary-found: "UI_TOAST_CHALLENGE_COMPLETE"
+
+# Particle effects
+particles:
+  herbal-found:
+    type: "VILLAGER_HAPPY"
+    count: 10
+    speed: 0.1
+  block-break:
+    type: "BLOCK_CRACK"
+    count: 10
+    speed: 0.3
+  block-regenerate:
+    type: "VILLAGER_HAPPY"
+    count: 15
+    speed: 0.1
+  legendary-found:
+    type: "FIREWORKS_SPARK"
+    count: 50
+    speed: 0.3
+
+# Block regeneration settings
+block-regeneration:
+  # Apakah block hilang saat di-harvest
+  enable-block-breaking: true
+
+  # Waktu regenerasi dalam detik
+  regeneration-time: 300  # 5 menit
+
+  # Particle effect saat block regenerate
+  show-regeneration-particles: true
+
+  # Sound effect saat block regenerate
+  play-regeneration-sound: true
+
+# ===========================================
+# DungeonChances Configuration
+# ===========================================
+
+# Nama world dungeon (case sensitive)
+dungeon-world: "DUNGEON"
+
+# Nama world spawn untuk teleport ketika kesempatan habis
+spawn-world: "world"
+
+# Jumlah maksimal kesempatan yang dimiliki player
+max-chances: 3
+
+# Pengaturan Scoreboard
+scoreboard:
+  # Judul scoreboard (mendukung color codes dengan &)
+  title: "&c&lDUNGEON"
+
+  # Format tampilan kesempatan (mendukung color codes dengan &)
+  chance-display: "&eKesempatan: &f"
+
+  # Pengaturan tambahan untuk scoreboard
+  dungeon-name: "Wisantara Dungeon"
+  server-info: "discord.wisantara.com"
+
+# ===========================================
+# Panduan Konfigurasi:
+# ===========================================
+#
+# dungeon-world: Ganti dengan nama world dungeon yang sesuai
+# spawn-world: Ganti dengan nama world spawn yang sesuai
+# max-chances: Ubah angka sesuai dengan jumlah kesempatan yang diinginkan
+# dungeon-name: Nama dungeon yang ditampilkan di scoreboard
+# server-info: Info server yang ditampilkan di bawah scoreboard
+#
+# Fitur Scoreboard Baru:
+# - Tampilan hearts visual (♥) untuk lives
+# - Status indicator (Safe/Warning/Critical)
+# - Border atas dan bawah dengan simbol ▬
+# - Tips dinamis berdasarkan kondisi player
+# - Tampilan yang lebih profesional dan menarik
+#
+# Color Codes yang dapat digunakan:
+# &0 = Black       &8 = Dark Gray
+# &1 = Dark Blue   &9 = Blue
+# &2 = Dark Green  &a = Green
+# &3 = Dark Aqua   &b = Aqua
+# &4 = Dark Red    &c = Red
+# &5 = Dark Purple &d = Light Purple
+# &6 = Gold        &e = Yellow
+# &7 = Gray        &f = White
+# &l = Bold        &o = Italic
+# &n = Underline   &m = Strikethrough
+# &k = Magic       &r = Reset
+# ===========================================
+

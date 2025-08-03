@@ -2,7 +2,20 @@ name: DungeonMechanism
 version: '1.0-SNAPSHOT'
 main: my.pikrew.MedievalRpg.DungeonMechanism
 api-version: '1.21'
+author: Pikrew
+description: MMORPG Dungeon Plugin
 commands:
+  dungeonreset:
+    description: Reset kesempatan player di dungeon
+    usage: /dungeonreset <player>
+    permission: dungeonchances.reset
+    permission-message: "Kamu tidak memiliki permission untuk menggunakan command ini!"
+
+  herbal:
+    description: Main HerbalCraft command
+    usage: /<command> [give|reload|info]
+    permission: herbalcraft.admin
+
   dungeonreload:
     description: Reload DungeonMechanism config and data
     usage: /dungeonreload
@@ -37,6 +50,13 @@ commands:
     aliases: [dungeonconfig, dcfg]
 
 permissions:
+  herbalcraft.admin:
+    description: Allows access to admin commands
+    default: op
+
+  herbalcraft.use:
+    description: Allows using herbal items
+    default: true
   dungeon.reload:
     description: Allows reloading the plugin
     default: op
@@ -69,3 +89,13 @@ permissions:
   dungeonmechanism.use:
     description: Menggunakan fitur basic plugin
     default: true
+
+  dungeonchances.reset:
+    description: Memberikan akses untuk mereset kesempatan player
+    default: op
+
+  dungeonchances.*:
+    description: Memberikan semua permission plugin
+    default: op
+    children:
+      dungeonchances.reset: true
