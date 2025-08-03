@@ -5,6 +5,17 @@ api-version: '1.21'
 author: Pikrew
 description: MMORPG Dungeon Plugin
 commands:
+  removeregion:
+    description: Menghilangkan blok di region WorldGuard secara bertahap
+    usage: /removeregion <nama_region>
+    permission: regionblockremover.use
+
+  checkpoint:
+    description: Command utama untuk mengelola checkpoint
+    usage: /<command> [add|list|remove|tp|reset|info]
+    permission: checkpoint.use
+    aliases: [ cp, checkpoints ]
+
   dungeonreset:
     description: Reset kesempatan player di dungeon
     usage: /dungeonreset <player>
@@ -50,6 +61,20 @@ commands:
     aliases: [dungeonconfig, dcfg]
 
 permissions:
+  regionblockremover.use:
+    description: Izin untuk menggunakan command removeregion
+    default: op
+
+  checkpoint.use:
+    description: Menggunakan command checkpoint dasar
+    default: true
+
+  checkpoint.admin:
+    description: Mengelola checkpoint (add, remove, reset, dll)
+    default: op
+    children:
+      checkpoint.use: true
+
   herbalcraft.admin:
     description: Allows access to admin commands
     default: op

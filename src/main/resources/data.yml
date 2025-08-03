@@ -1,0 +1,5 @@
+# File konfigurasi data checkpoint
+# File ini akan dibuat otomatis dan diisi dengan data checkpoint dan player
+
+checkpoints: []
+players: {}

@@ -314,4 +314,9 @@ scoreboard:
 # &n = Underline   &m = Strikethrough
 # &k = Magic       &r = Reset
 # ===========================================
+# ===========================================
+# RemoveRegion Configuration
+# ===========================================
+# yang pertama buat region menggunakan world guard dan world edit
+# lalu set namanya, jalankan /removeregion <namaregion>
 
