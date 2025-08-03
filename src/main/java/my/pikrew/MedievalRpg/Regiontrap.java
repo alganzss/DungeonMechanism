@@ -7,10 +7,8 @@ import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Particle;
+import org.bukkit.*;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,9 +19,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class Regiontrap implements Listener {
 
     private final JavaPlugin plugin;
+    private final FileConfiguration config;
 
     public Regiontrap(JavaPlugin plugin) {
         this.plugin = plugin;
+        this.config = plugin.getConfig();
     }
 
     @EventHandler
@@ -31,21 +31,36 @@ public class Regiontrap implements Listener {
         Player player = event.getPlayer();
         Location loc = player.getLocation();
 
-        if (loc.getBlock().getType() == Material.STONECUTTER) {
-            if (isInRegion(player, "dg1")) {
+        String materialName = config.getString("trap.block", "STONECUTTER");
+        Material triggerBlock = Material.matchMaterial(materialName);
+        if (triggerBlock == null) return;
+
+        if (loc.getBlock().getType() == triggerBlock) {
+            String region = config.getString("trap.region", "dg1");
+            if (isInRegion(player, region)) {
                 trapPlayer(player, loc);
             }
         }
     }
 
     private void trapPlayer(Player player, Location loc) {
-        // Tampilkan kotak partikel selama 5 detik
+        int duration = config.getInt("trap.duration", 5); // in seconds
+        String particleName = config.getString("trap.particle", "SNOWFLAKE");
+
+        Particle particle;
+        try {
+            particle = Particle.valueOf(particleName.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            particle = Particle.SNOWFLAKE; // fallback
+        }
+
+        // Display particle box
         new BukkitRunnable() {
             int counter = 0;
 
             @Override
             public void run() {
-                if (counter >= 5) {
+                if (counter >= duration) {
                     this.cancel();
                     return;
                 }
@@ -54,7 +69,7 @@ public class Regiontrap implements Listener {
             }
         }.runTaskTimer(plugin, 0L, 20L);
 
-        // Membekukan gerakan
+        // Freeze movement
         player.setWalkSpeed(0f);
         player.setFlySpeed(0f);
 
@@ -64,7 +79,7 @@ public class Regiontrap implements Listener {
                 player.setWalkSpeed(0.2f);
                 player.setFlySpeed(0.1f);
             }
-        }.runTaskLater(plugin, 100L);
+        }.runTaskLater(plugin, duration * 20L);
     }
 
     private void drawParticleBox(Location loc, Particle particle) {

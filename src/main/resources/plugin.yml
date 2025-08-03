@@ -1,19 +1,71 @@
 name: DungeonMechanism
 version: '1.0-SNAPSHOT'
 main: my.pikrew.MedievalRpg.DungeonMechanism
-api-version: '1.20'
+api-version: '1.21'
 commands:
   dungeonreload:
     description: Reload DungeonMechanism config and data
-    usage: /<command>
+    usage: /dungeonreload
     permission: dungeon.reload
+    permission-message: "§cKamu tidak memiliki izin untuk menjalankan perintah ini."
+
   createlaser:
     description: Membuat laser antar dua titik menggunakan WorldEdit
     usage: /createlaser
+    permission: createrlaser
+    permission-message: "§cKamu tidak memiliki izin untuk menjalankan perintah ini."
+
+  dungeonspawn:
+    description: Manage dungeon spawn points
+    usage: /dungeonspawn <set|tp|info>
+    permission: dungeonmechanism.admin
+    permission-message: "§cKamu tidak memiliki izin untuk menjalankan perintah ini."
+    aliases: [dspawn, ds]
+
+  dconfig:
+    description: Open GUI configuration menu for dungeon mechanism
+    usage: |
+      §e/dconfig §7- Buka menu utama GUI
+      §e/dconfig main §7- Buka menu utama
+      §e/dconfig door §7- Buka menu Door Room
+      §e/dconfig heal §7- Buka menu Heal Area
+      §e/dconfig trap §7- Buka menu Trap
+      §e/dconfig respawn §7- Buka menu Death Respawn
+      §e/dconfig reload §7- Reload plugin
+    permission: dungeonmechanism.admin
+    permission-message: "§c❌ Kamu tidak memiliki izin untuk menggunakan command ini!"
+    aliases: [dungeonconfig, dcfg]
+
 permissions:
   dungeon.reload:
     description: Allows reloading the plugin
     default: op
+
   createrlaser:
-    description: permission
+    description: Permission to create laser
     default: op
+
+  dungeonmechanism.*:
+    description: Memberikan akses ke semua fitur plugin
+    default: op
+    children:
+      dungeonmechanism.admin:
+        description: Akses admin untuk mengelola spawn point dan konfigurasi
+        default: op
+      dungeonmechanism.use:
+        description: Menggunakan fitur basic plugin
+        default: true
+      dungeon.reload:
+        description: Allows reloading the plugin
+        default: op
+
+  dungeonmechanism.admin:
+    description: Akses admin untuk mengelola spawn point dan konfigurasi GUI
+    default: op
+    children:
+      dungeonmechanism.use: true
+      dungeon.reload: true
+
+  dungeonmechanism.use:
+    description: Menggunakan fitur basic plugin
+    default: true

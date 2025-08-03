@@ -11,8 +11,17 @@ heal-block: LAPIS_BLOCK
 heal-amount: 1.0
 #---------------------------------------------------------------------------------------------------
 #Trap mechanism
-regiond: dg1
-block: STONECUTTER
-trap_duration: 5
-particle: FLAME
-
+trap:
+  block: STONECUTTER      # Block pemicu
+  region: dg1             # Region WorldGuard
+  duration: 5             # Lama tidak bisa bergerak (detik)
+  particle: SNOWFLAKE     # Partikel visual
+#---------------------------------------------------------------------------------------------------
+# Pengaturan Death Respawn System
+dungeon_world: "DUNGEON"
+respawn_duration: 10
+# Koordinat Spawn Point Dungeon
+dungeon_spawn:
+  x: 183
+  y: 4
+  z: 16
